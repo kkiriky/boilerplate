@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import SlideAutoPlay from '@/components/SlideAutoPlay/SlideAutoPlay';
 
 const meta = {
-  title: 'Boilerplate/Slide Auto Play',
+  title: 'Boilerplate/Slide/Slide Auto Play',
   component: SlideAutoPlay,
-  tags: ['autodocs'],
 } satisfies Meta<typeof SlideAutoPlay>;
 
 export default meta;

@@ -1,0 +1,17 @@
+/* Auto slide animation */
+@keyframes auto-slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(calc(-8 * (240px + 16px)), 0, 0);
+  }
+}
+
+/* Text background animtion */
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
