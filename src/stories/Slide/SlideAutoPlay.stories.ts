@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SlideAutoPlay from '@/components/SlideAutoPlay/SlideAutoPlay';
+import SlideAutoPlay from '@/components/SlideAutoPlay';
 
 const meta = {
   title: 'Boilerplate/Slide/Slide Auto Play',
