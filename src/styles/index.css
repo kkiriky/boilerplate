@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* nesting으로 인한 postcss 설정 필요 */
+  /* 
+    'postcss-import': {},
+    'tailwindcss/nesting': {},
+  */
+  .custom-scrollbar {
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 8px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 8px;
+      /* 
+        https://developer.mozilla.org/ko/docs/Web/CSS/box-shadow
+        inset 키워드가 존재하면 요소가 움푹 들어간 것처럼
+        그림자가 요소의 테두리 안, 배경색 위, 내부 콘텐츠 밑에 그려집니다. 
+      */
+      box-shadow: inset 0px 0px 4px #999;
+    }
+  }
+}
