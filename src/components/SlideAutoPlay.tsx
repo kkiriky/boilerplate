@@ -1,9 +1,6 @@
 const list = [...Array(8)].map((_, i) => i + 1);
 
 interface SlideAutoPlayProps {
-  /**
-   * Is bidirection?
-   */
   isBidirection?: boolean;
 }
 
