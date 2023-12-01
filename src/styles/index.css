@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .radio {
+    @apply relative m-0 h-20 w-20 cursor-pointer appearance-none rounded-full border-2 border-solid border-[#d2d8dc] align-middle;
+  }
+  .radio:checked {
+    @apply border-[#1668e4];
+  }
+  .radio:checked::after {
+    @apply absolute left-3 top-3 block h-10 w-10 rounded-full bg-[#1668e4] content-[''];
+  }
+}
+
 @layer utilities {
   /* nesting으로 인한 postcss 설정 필요 */
   /* 
