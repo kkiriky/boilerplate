@@ -3,7 +3,7 @@ import { useArgs } from '@storybook/preview-api';
 import MobileMenuButton from '@/components/MobileMenuButton';
 
 const meta = {
-  title: 'Boilerplate/MobileMenuButton',
+  title: 'Boilerplate/Atoms/MobileMenuButton',
   component: MobileMenuButton,
   parameters: {
     layout: 'centered',
