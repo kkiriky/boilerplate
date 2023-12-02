@@ -1,3 +1,5 @@
+import plugin from 'tailwindcss/plugin';
+
 const px0_10 = { ...[...Array(11)].map((_, i) => `${i}px`) };
 const px0_100 = { ...[...Array(101)].map((_, i) => `${i}px`) };
 const px0_600 = { ...[...Array(601)].map((_, i) => `${i}px`) };
@@ -24,5 +26,9 @@ export default {
     placeholderOpacity: false,
     ringOpacity: false,
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('mo', "@media (max-width: theme('screens.xl'))"); // instead of hard-coded 640px use sm breakpoint value from config. Or anything
+    }),
+  ],
 };

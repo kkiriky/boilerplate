@@ -9,6 +9,13 @@
 */
 
 @layer components {
+  .perview-center-slider {
+    @apply relative max-w-[1180px];
+
+    &::before {
+      @apply absolute bottom-0 left-0 top-0 z-[5] w-300 bg-[linear-gradient(90deg,#ffece7_10.83%,rgba(255,236,231,0)_91.56%)] content-[''];
+    }
+  }
 }
 
 @layer utilities {

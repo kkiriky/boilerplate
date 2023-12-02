@@ -28,6 +28,7 @@
     "react-router-dom": "^6.20.0",
     "react-select": "^5.8.0",
     "react-type-animation": "^3.2.0",
+    "swiper": "^11.0.5",
     "tailwind-merge": "^2.0.0",
     "throttle-debounce": "^5.0.0"
   },
@@ -35,7 +36,6 @@
     "@storybook/addon-essentials": "^7.6.3",
     "@storybook/addon-interactions": "^7.6.3",
     "@storybook/addon-links": "^7.6.3",
-    "@storybook/addon-onboarding": "^1.0.8",
     "@storybook/blocks": "^7.6.3",
     "@storybook/react": "^7.6.3",
     "@storybook/react-vite": "^7.6.3",
