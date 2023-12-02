@@ -1,0 +1,27 @@
+.pagination {
+  display: flex;
+  gap: 8px;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 32px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 4px;
+
+    font: 14px;
+    font-weight: bold;
+  }
+
+  li.selected {
+    a {
+      border: 1px solid #a855f7;
+      background-color: #a855f7;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+.radio {
+  position: relative;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+
+  appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+
+  &:not(:checked):hover {
+    border-color: rgba(#ccc, 0.7);
+  }
+
+  &:checked {
+    border-color: #1668e4;
+  }
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #1668e4;
+  }
+}
