@@ -8,6 +8,12 @@
     'tailwindcss/nesting': {},
 */
 
+@layer base {
+  input {
+    outline: none;
+  }
+}
+
 @layer components {
   .perview-center-slider {
     @apply relative max-w-[1180px];

@@ -15,6 +15,10 @@
 
     font: 14px;
     font-weight: bold;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   li.selected {

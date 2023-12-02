@@ -1,0 +1,404 @@
+.react-datepicker-wrapper {
+  width: 100%;
+  /* width: fit-content !important; // 너비를 고정시켜야 할 경우 */
+
+  .react-datepicker__input-container {
+    /* ********************** 인풋 컨테이너 **********************  */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    /* width: 300px; // 너비를 고정시켜야 할 경우 */
+    height: 50px;
+    background: #fff;
+    border: 1px solid grey;
+    border-radius: 4px;
+    overflow: hidden;
+    /* ********************** 인풋 컨테이너 **********************  */
+
+    /* ********************** 인풋 **********************  */
+    input {
+      border: none;
+      cursor: pointer;
+
+      min-width: 0;
+      width: 100%;
+      padding: 12px 0 12px 12px;
+
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 23px;
+
+      &::placeholder {
+        color: grey;
+      }
+    }
+    /* ********************** 인풋 **********************  */
+
+    /* ********************** 커스텀 인풋 아이콘 래퍼 **********************  */
+    div {
+      flex-shrink: 0;
+      padding-right: 12px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    /* ********************** 커스텀 인풋 아이콘 래퍼 **********************  */
+  }
+}
+
+/* ********************** 팝업과 인풋간의 거리 조절 **********************  */
+.react-datepicker-popper[data-placement^='bottom'] {
+  padding-top: 10px;
+}
+
+/* ********************** 팝업과 인풋간의 거리 조절 **********************  */
+
+/* ********************** 달력 컨테이너 **********************  */
+.react-datepicker {
+  position: relative;
+  /* width: 300px; // 너비를 고정시켜야 할 경우 */
+  padding: 12px;
+
+  background: #fff;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+/* ********************** 달력 컨테이너 **********************  */
+
+.react-datepicker__aria-live {
+  display: none;
+}
+
+/* ********************** 팝업 컨테이너 위에 달린 삼각형 **********************  */
+.react-datepicker__triangle {
+  /* display: none; */
+
+  position: absolute;
+  top: -10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent gray transparent;
+
+  /* 삼각형 내부 */
+  &::after {
+    position: absolute;
+    content: '';
+    top: 1px;
+    left: 0;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 0 9px 9px 9px;
+    border-color: transparent transparent #fff transparent;
+  }
+}
+/* ********************** 팝업 컨테이너 위에 달린 삼각형 **********************  */
+
+/* ********************** 아이콘 버튼 **********************  */
+button.react-datepicker__navigation {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    path {
+      stroke: #ccc;
+    }
+  }
+}
+button.react-datepicker__navigation--previous {
+  top: 12px;
+  left: 12px;
+}
+button.react-datepicker__navigation--next {
+  top: 12px;
+  right: 12px;
+}
+/* ********************** 아이콘 버튼 **********************  */
+
+.react-datepicker__month-container {
+  /* ********************** 헤더(연.월 / 요일) **********************  */
+  .react-datepicker__header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    /* ********************** 연도 드롭다운 **********************  */
+    .react-datepicker__header__dropdown {
+      /* display: none; */
+
+      /* 2023.11 에서 연도를 클릭하면 연도를 선택할 수 있도록 hacky한 방식 */
+      /* position: absolute;
+        top: 16px;
+        left: 40%;
+
+        .react-datepicker__year-read-view--selected-year {
+          opacity: 0;
+        } */
+      /* 2023.11 에서 연도를 클릭하면 연도를 선택할 수 있도록 hacky한 방식 */
+
+      /* 연도 드롭다운 컨테이너 */
+      .react-datepicker__year-dropdown-container.react-datepicker__year-dropdown-container--scroll {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        margin: 0 auto;
+        cursor: pointer;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        /* 연도 드롭다운 스크롤 */
+        .react-datepicker__year-dropdown.react-datepicker__year-dropdown--scrollable {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #fff;
+          height: 150px;
+          overflow: auto;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+
+          /* 스크롤 스타일 */
+          &::-webkit-scrollbar {
+            width: 8px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 8px;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+          }
+          &::-webkit-scrollbar-track {
+            background-color: #eee;
+            border-radius: 4px;
+          }
+
+          /* 연도 */
+          .react-datepicker__year-option {
+            padding: 6px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+
+            &:hover {
+              background-color: skyblue;
+              color: #fff;
+
+              /* 호버 시 화살표 색상 변경 */
+              .react-datepicker__navigation {
+                &::after {
+                  border-color: #fff;
+                }
+              }
+            }
+          }
+
+          .react-datepicker__navigation {
+            margin: -6px 0;
+          }
+
+          /* 선택된 연도 */
+          .react-datepicker__year-option--selected_year {
+            background-color: skyblue;
+            color: #fff;
+
+            .react-datepicker__year-option--selected {
+              display: none; // 기본값으로 체크표시가 들어있음
+            }
+          }
+
+          /* 다가올 연도 */
+          .react-datepicker__navigation--years-upcoming {
+            position: relative;
+            transform: scale(1);
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+
+            &::after {
+              content: '';
+              box-sizing: border-box;
+
+              position: absolute;
+              bottom: 2px;
+              left: 4px;
+
+              width: 10px;
+              height: 10px;
+              border-top: 2px solid #999;
+              border-right: 2px solid #999;
+              transform: rotate(-45deg);
+            }
+          }
+
+          /* 과거 연도 */
+          .react-datepicker__navigation--years-previous {
+            position: relative;
+            transform: scale(1);
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+
+            &::after {
+              content: '';
+              box-sizing: border-box;
+              position: absolute;
+              top: 2px;
+              left: 4px;
+
+              width: 10px;
+              height: 10px;
+              border-bottom: 2px solid #999;
+              border-right: 2px solid #999;
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+    /* ********************** 연도 드롭다운 **********************  */
+
+    /* ********************** 연.월 **********************  */
+    .react-datepicker__current-month {
+      height: 24px; // 버튼의 높이와 동일하게
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-weight: 600;
+      font-size: 14px;
+      line-height: normal;
+    }
+    /* ********************** 연.월 **********************  */
+
+    /* ********************** 요일 컨테이너 **********************  */
+    .react-datepicker__day-names {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+
+      .react-datepicker__day-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* ********************** 요일 **********************  */
+        font-size: 13px;
+        line-height: 15px;
+        /* ********************** 요일 **********************  */
+      }
+      .react-datepicker__day-name:first-of-type {
+        color: red;
+      }
+      .react-datepicker__day-name:last-of-type {
+        color: blue;
+      }
+    }
+  }
+  /* ********************** 헤더(연월일 / 요일) **********************  */
+
+  /* ********************** 바디(일) **********************  */
+  .react-datepicker__month {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .react-datepicker__week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+
+      /* ********************** 날짜 **********************  */
+      .react-datepicker__day {
+        padding: 4px;
+        aspect-ratio: 1;
+        cursor: pointer;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        font-size: 13px;
+        line-height: normal;
+
+        &:hover {
+          border-radius: 50%;
+          background: rgba(0, 0, 255, 0.7);
+          color: #fff !important;
+        }
+      }
+      /* ********************** 날짜 **********************  */
+
+      /* ********************** 주말 색상 **********************  */
+      .react-datepicker__day--weekend:first-of-type {
+        color: red;
+      }
+      .react-datepicker__day--weekend:last-of-type {
+        color: blue;
+      }
+      /* ********************** 주말 색상 **********************  */
+
+      /* ********************** 지난달 혹은 다음달의 날짜 **********************  */
+      .react-datepicker__day--outside-month {
+        color: grey !important;
+      }
+      /* ********************** 지난달 혹은 다음달의 날짜 **********************  */
+
+      /* ********************** 선택된 날짜 **********************  */
+      .react-datepicker__day--selected,
+      .react-datepicker__day--selected:hover {
+        font-weight: 500;
+        background-color: blue;
+        border-radius: 50%;
+        color: #fff !important;
+      }
+
+      .react-datepicker__day--keyboard-selected {
+        outline: none;
+        border: none;
+      }
+      /* ********************** 선택된 날짜 **********************  */
+
+      /* ********************** 선택 불가능한 날짜 **********************  */
+      .react-datepicker__day--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: transparent !important;
+      }
+      /* ********************** 선택 불가능한 날짜 **********************  */
+
+      /* 선택 불가능한 날짜인데, 일요일일 경우 호버 시 색상이 변경되지 않도록 */
+      .react-datepicker__day--disabled.react-datepicker__day--weekend:first-of-type:not(
+          .react-datepicker__day--outside-month
+        ) {
+        &:hover {
+          color: red !important;
+        }
+      }
+      /* 선택 불가능한 날짜인데, 토요일일 경우 호버 시 색상이 변경되지 않도록 */
+      .react-datepicker__day--disabled.react-datepicker__day--weekend {
+        &:hover {
+          color: #2b4eff !important;
+        }
+      }
+      /* 선택 불가능한 날짜인데, 이전 달 혹은 다음달일 경우 호버 시 색상이 변경되지 않도록 */
+      .react-datepicker__day--disabled.react-datepicker__day--outside-month {
+        &:hover {
+          color: grey !important;
+        }
+      }
+    }
+  }
+  /* ********************** 바디(일) **********************  */
+}

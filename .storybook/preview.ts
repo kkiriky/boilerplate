@@ -5,6 +5,7 @@ import '../src/styles/radio.scss';
 import '../src/styles/scrollbar.scss';
 import '../src/styles/react-select.scss';
 import '../src/styles/pagination.scss';
+import '../src/styles/react-datepicker.scss';
 import 'swiper/css';
 
 const preview: Preview = {

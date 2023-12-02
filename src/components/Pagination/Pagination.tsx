@@ -2,9 +2,9 @@ import { useCallback, useMemo } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import ChevronLeft from '@/assets/icons/chevron-left.svg?react';
-import ChevronLeftDouble from '@/assets/icons/chevron-left-double.svg?react';
+import ChevronLeftDouble from '@/assets/icons/chevron-double-left.svg?react';
 import ChevronRight from '@/assets/icons/chevron-right.svg?react';
-import ChevronRightDouble from '@/assets/icons/chevron-right-double.svg?react';
+import ChevronRightDouble from '@/assets/icons/chevron-double-right.svg?react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface PaginationProps {
@@ -64,7 +64,7 @@ export default function Pagination({
   }, [currentPage, totalPage]);
 
   return (
-    <div className="mx-auto flex w-fit gap-8 [&_svg_path]:fill-gray-500">
+    <div className="mx-auto flex w-fit gap-8">
       <div
         onClick={onClickPreviousDouble}
         className="flex h-32 w-32 cursor-pointer items-center justify-center rounded-4 border border-white"
@@ -85,7 +85,7 @@ export default function Pagination({
       />
       <div
         onClick={onClickNextDouble}
-        className="flex h-28 w-28 cursor-pointer items-center justify-center rounded-4 border border-white"
+        className="flex h-32 w-32 cursor-pointer items-center justify-center rounded-4 border border-white"
       >
         <ChevronRightDouble />
       </div>
