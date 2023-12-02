@@ -1,0 +1,141 @@
+/* Nesting을 해야 기본 스타일을 overriding 할 수 있으니 nesting을 제거하지 말 것 */
+
+// reactSelectContainerStyle
+
+.react-select-container {
+  // container > 1.control
+  // container > 2.menu
+  // 전체 컨테이너(width만 fit-content로 설정, 이후 설정 X)
+  width: fit-content;
+
+  // control > 1.value-container
+  // control > 2.indicators
+  // 컨트롤 컨테이너 (default => min-height:38px, cursor: default 등등)
+  .react-select__control {
+    cursor: pointer;
+    // padding-top, padding-bottom을 주게되면 placeholder를 사용할 때 문제가 발생
+    // 따라서 위아래 패딩 값은 절대로 주어서는 안되고, 양옆으로만 가능
+    padding: 0 15px;
+    background: #fff;
+    min-width: 240px;
+    min-height: 50px;
+    border: 1px solid #999;
+    border-radius: 4px;
+
+    // value-container > 1.placeholder
+    // value-container > 2.single-value
+    .react-select__value-container {
+      .react-select__placeholder {
+        color: #888;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px; /* 142.857% */
+      }
+
+      // 텍스트 스타일 설정
+      .react-select__single-value {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px; /* 142.857% */
+      }
+    }
+
+    // indicators > indicator-separator, dropdown-indicator
+    .react-select__indicators {
+      // 구분선: 설정할 일 거의 없으므로 diplay:none
+      .react-select__indicator-separator {
+        display: none;
+      }
+
+      // clear 인디케이터 (X표시)
+      .react-select__clear-indicator {
+        svg {
+          path {
+            fill: #aaa;
+          }
+        }
+      }
+      // 드롭다운 스타일 설정
+      // .react-select__dropdown-indicator {
+      // }
+    }
+  }
+
+  // 메뉴가 열렸을 때, 컨테이너(컨트롤) 스타일
+  .react-select__control--menu-is-open {
+    border: 1px solid #00b4a9;
+  }
+  // 선택 불가일 때, 컨테이너(컨트롤) 스타일
+  .react-select__control--is-disabled {
+    pointer-events: auto;
+    cursor: not-allowed;
+  }
+}
+
+// reactSelectMenuStyle
+.react-select-container {
+  // 메뉴 리스트 컨테이너 > 메뉴 리스트 > 메뉴 리스트 아이템
+  // 메뉴 리스트 컨테이너(default => position:absolute, top:100%, width:100%)
+  .react-select__menu {
+    top: calc(100% + 4px);
+    padding: 4px 0px;
+
+    // 메뉴 리스트(default => position:relative, overflow-y:auto, max-height: 300px)
+    .react-select__menu-list {
+      border: 1px solid #00b4a9;
+      border-radius: 4px;
+      background: #fff;
+
+      max-height: 360px;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 8px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+      }
+    }
+
+    // 메뉴 리스트 아이템
+    .react-select__option {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      height: 48px;
+
+      // hacky code
+      // &:hover {
+      //   background: #00b4a9;
+      // }
+    }
+
+    // 선택된 리스트 아이템
+    .react-select__option--is-focused.react-select__option--is-selected {
+      background: #00b4a9;
+      color: #fff;
+    }
+    // placeholder를 사용하는 경우에는 고려를 해야함
+    // placeholder를 사용하고, 디폴트 값이 설정되어 있지 않은 경우에는
+    // 첫 번째 아이템이 포커스되어 있는 것이 원치 않는 상황일 수도 있음(이게 디폴트 값 + 설정이 불가능함)
+    .react-select__option--is-focused {
+      background: #00b4a9;
+      color: #fff;
+    }
+
+    // 선택불가로 설정된 리스트 아이템
+    .react-select__option--is-disabled {
+      cursor: not-allowed;
+      color: #ccc;
+
+      // hacky code
+      &:hover {
+        background: #fff;
+      }
+    }
+  }
+}

@@ -12,7 +12,10 @@ interface PaginationProps {
   currentPage: number;
 }
 
-const Pagination = ({ totalPage, currentPage }: PaginationProps) => {
+export default function Pagination({
+  totalPage,
+  currentPage,
+}: PaginationProps) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -88,6 +91,4 @@ const Pagination = ({ totalPage, currentPage }: PaginationProps) => {
       </div>
     </div>
   );
-};
-
-export default Pagination;
+}

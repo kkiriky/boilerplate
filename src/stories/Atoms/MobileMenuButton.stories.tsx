@@ -9,6 +9,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    isOpen: false,
+    onToggleMenu: () => {},
+  },
   render: function Render(args) {
     const [{ isOpen }, updateArgs] =
       useArgs<Parameters<typeof MobileMenuButton>[0]>();
@@ -26,9 +30,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
-  args: {
-    isOpen: false,
-    onToggleMenu: () => {},
-  },
-};
+export const Basic: Story = {};
