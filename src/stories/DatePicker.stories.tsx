@@ -5,7 +5,7 @@ import { formatDate } from '@/utils/formatDate';
 import { Controller, useForm } from 'react-hook-form';
 
 const meta = {
-  title: 'Boilerplate/DatePicker/Basic',
+  title: 'Boilerplate/DatePicker/ReactDatePicker',
   component: DatePicker,
   tags: ['autodocs'],
   parameters: {
@@ -56,6 +56,58 @@ export const ControllerExample: Story = {
             placeholderText="날짜를 선택해주세요."
           />
         )}
+      />
+    );
+  },
+};
+
+export const DateRange: Story = {
+  render: function Render() {
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    return (
+      <div className="grid grid-cols-[360px_auto_360px] items-center gap-8">
+        <DatePicker
+          selectsStart
+          value={startDate}
+          startDate={startDate ? new Date(startDate) : null}
+          endDate={endDate ? new Date(endDate) : null}
+          onChange={(date) => setStartDate(formatDate(date))}
+          placeholderText="시작 날짜를 선택해주세요."
+          maxDate={endDate ? new Date(endDate) : null}
+        />
+        <span>~</span>
+        <DatePicker
+          selectsEnd
+          value={endDate}
+          startDate={startDate ? new Date(startDate) : null}
+          endDate={endDate ? new Date(endDate) : null}
+          onChange={(date) => setEndDate(formatDate(date))}
+          placeholderText="종료 날짜를 선택해주세요."
+          minDate={startDate ? new Date(startDate) : null}
+        />
+      </div>
+    );
+  },
+};
+
+export const DateRangeForOneDatePicker: Story = {
+  render: function Render() {
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    return (
+      <DatePicker
+        selectsRange
+        value={startDate}
+        onChange={([start, end]) => {
+          setStartDate(start ? formatDate(start) : '');
+          setEndDate(end ? formatDate(end) : '');
+        }}
+        startDate={startDate ? new Date(startDate) : null}
+        endDate={endDate ? new Date(endDate) : null}
+        placeholderText="기간을 선택해주세요."
       />
     );
   },
