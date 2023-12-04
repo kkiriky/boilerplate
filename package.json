@@ -17,6 +17,7 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@faker-js/faker": "^8.3.1",
     "@popperjs/core": "^2.11.8",
+    "ag-grid-react": "^31.0.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
