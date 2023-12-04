@@ -22,6 +22,34 @@
       @apply absolute bottom-0 left-0 top-0 z-[5] w-300 bg-[linear-gradient(90deg,#ffece7_10.83%,rgba(255,236,231,0)_91.56%)] content-[''];
     }
   }
+
+  .toggle {
+    @apply inline-block cursor-pointer;
+  }
+  .toggle-switch {
+    @apply relative inline-block h-32 w-58 rounded-2xl align-middle transition-[background] duration-[0.25s] before:absolute before:left-4 before:top-4 before:block before:h-24 before:w-24 before:rounded-[50%] before:shadow-[0_0_0_1px_rgba(0,0,0,0.25)] before:transition-[left] before:duration-[0.25s];
+    background: #ccc;
+  }
+  .toggle-switch:before,
+  .toggle-switch:after {
+    @apply content-[""];
+  }
+  .toggle-switch:before {
+    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  }
+  .toggle:hover .toggle-switch:before {
+    @apply shadow-[0_0_0_1px_rgba(0,0,0,0.5)];
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  }
+  .toggle-checkbox:checked + .toggle-switch {
+    background: #60a5fa;
+  }
+  .toggle-checkbox:checked + .toggle-switch:before {
+    @apply left-30;
+  }
+  .toggle-checkbox {
+    @apply invisible absolute;
+  }
 }
 
 @layer utilities {

@@ -1,0 +1,103 @@
+.tooltip {
+  &[data-popper-placement^='top'] > .tooltip-arrow {
+    bottom: -8px;
+
+    &::before,
+    &::after {
+      border-bottom: 0;
+    }
+
+    /* 배경 */
+    &::before {
+      bottom: 1.414px;
+      border-color: #fff transparent transparent transparent;
+      z-index: 10;
+    }
+    /* 테두리 */
+    &::after {
+      bottom: 0;
+      border-color: #9ca3af transparent transparent transparent;
+      z-index: 9;
+    }
+  }
+
+  &[data-popper-placement^='bottom'] > .tooltip-arrow {
+    top: -8px;
+
+    &::before,
+    &::after {
+      border-top: 0;
+    }
+
+    /* 배경 */
+    &::before {
+      top: 1.414px;
+      border-color: transparent transparent #fff transparent;
+      z-index: 10;
+    }
+    /* 테두리 */
+    &::after {
+      top: 0;
+      border-color: transparent transparent #9ca3af transparent;
+      z-index: 9;
+    }
+  }
+
+  &[data-popper-placement^='left'] > .tooltip-arrow {
+    right: -8px;
+
+    &::before,
+    &::after {
+      border-right: 0;
+    }
+
+    /* 배경 */
+    &::before {
+      right: 1.414px;
+      border-color: transparent transparent transparent #fff;
+      z-index: 10;
+    }
+    /* 테두리 */
+    &::after {
+      right: 0;
+      border-color: transparent transparent transparent #9ca3af;
+      z-index: 9;
+    }
+  }
+
+  &[data-popper-placement^='right'] > .tooltip-arrow {
+    left: -8px;
+
+    &::before,
+    &::after {
+      border-left: 0;
+    }
+
+    /* 배경 */
+    &::before {
+      left: 1.414px;
+      border-color: transparent #fff transparent transparent;
+      z-index: 10;
+    }
+    /* 테두리 */
+    &::after {
+      left: 0;
+      border-color: transparent #9ca3af transparent transparent;
+      z-index: 9;
+    }
+  }
+}
+
+.tooltip-arrow {
+  position: relative;
+  width: 16px;
+  height: 8px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    border-width: 8px;
+    border-style: solid;
+  }
+}

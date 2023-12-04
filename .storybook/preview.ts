@@ -7,6 +7,8 @@ import '../src/styles/react-select.scss';
 import '../src/styles/pagination.scss';
 import '../src/styles/react-datepicker.scss';
 import 'swiper/css';
+import '../src/styles/triangle.scss';
+import '../src/styles/popper.scss';
 
 const preview: Preview = {
   parameters: {
