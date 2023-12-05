@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import '../src/styles/index.css';
 import '../src/styles/animations.css';
 import '../src/styles/radio.scss';
@@ -11,6 +12,11 @@ import '../src/styles/triangle.scss';
 import '../src/styles/popper.scss';
 import '../src/styles/ag-grid.scss';
 
+// Initialize MSW
+initialize({
+  onUnhandledRequest: 'bypass',
+});
+
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -21,6 +27,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [mswLoader],
 };
 
 export default preview;

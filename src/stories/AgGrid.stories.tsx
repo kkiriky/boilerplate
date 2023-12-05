@@ -2,12 +2,17 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import AgGrid from '@/components/AgGrid/AgGrid';
 import { ColDef } from 'ag-grid-community';
-import { IRowData, useAgGridStore } from '@/store/agGridStore';
+import { MockUser } from '@/api/user/user.types';
 import { AgGridReact } from 'ag-grid-react';
+
+import { userHandlers } from '@/mocks/userHandlers';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import EditIcon from '@/assets/icons/edit.svg?react';
 import DownloadIcon from '@/assets/icons/download.svg?react';
 import DeleteIcon from '@/assets/icons/delete.svg?react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { useDeleteUsers, useEditUsers, useGetUsers } from '@/hooks/useUser';
 
 const meta = {
   title: 'Boilerplate/Ag Grid/Example',
@@ -18,7 +23,32 @@ const meta = {
     columnDefnitions: [],
     rowData: [],
     editable: false,
+    setEditedRows: () => {},
+    setSelectedCount: () => {},
   },
+  parameters: {
+    msw: { handlers: userHandlers },
+  },
+  decorators: [
+    (Story) => {
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+            refetchOnWindowFocus: false,
+          },
+        },
+      });
+
+      return (
+        <QueryClientProvider client={queryClient}>
+          <Story />
+
+          <ReactQueryDevtools initialIsOpen={false} position="bottom" />
+        </QueryClientProvider>
+      );
+    },
+  ],
 } satisfies Meta<typeof AgGrid>;
 
 export default meta;
@@ -38,12 +68,11 @@ export const Example: Story = {
 
     const [editable, setEditable] = useState(false);
     const [selectedCount, setSelectedCount] = useState(0);
-    const [editedRows, setEditedRows] = useState<IRowData[]>([]);
+    const [editedRows, setEditedRows] = useState<MockUser[]>([]);
 
-    const rowData = useAgGridStore((state) => state.data);
-    const deleteRows = useAgGridStore((state) => state.deleteRows);
+    const { data: users } = useGetUsers();
+    const { mutate: deleteUsers } = useDeleteUsers();
 
-    // 삭제
     const onDeleteSelectedRows = useCallback(() => {
       const selectedRows = gridRef.current?.api.getSelectedRows();
       if (!selectedRows?.length) {
@@ -57,25 +86,25 @@ export const Example: Story = {
       if (!isConfirmed) return;
 
       const seletedIdList = selectedRows.map((row) => row.id);
-      deleteRows(seletedIdList);
-    }, [deleteRows]);
+      deleteUsers(seletedIdList);
+    }, [deleteUsers]);
 
-    // 수정
+    const { mutate: editUsers } = useEditUsers();
     const onEdit = useCallback(() => {
       if (editable) {
         if (gridRef.current?.api.getEditingCells().length) {
           return alert('먼저 수정을 완료해주세요.');
         }
 
-        // 편집 완료 시 실행할 로직
-        console.log(editedRows);
+        editUsers(editedRows);
         // 선택된 항목이 있을 경우 모두 해제
         gridRef.current?.api.deselectAll();
       }
 
       setEditable((prev) => !prev);
-    }, [editable, editedRows]);
+    }, [editUsers, editable, editedRows]);
 
+    // csv 추출
     const onExportCsv = useCallback(() => {
       gridRef.current?.api.exportDataAsCsv({
         // 메뉴 컬럼 제외
@@ -140,7 +169,7 @@ export const Example: Story = {
         <AgGrid
           gridRef={gridRef}
           columnDefnitions={columnDefnitions}
-          rowData={rowData}
+          rowData={users}
           editable={editable}
           setSelectedCount={setSelectedCount}
           setEditedRows={setEditedRows}

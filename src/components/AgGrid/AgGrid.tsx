@@ -6,7 +6,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import useGetLocaleText from './hooks/useGetLocaleText';
 import useColumnDefinition from './hooks/useColumnDefinition';
 import useAgGridEvents from './hooks/useAgGridEvents';
-import { IRowData } from '@/store/agGridStore';
+import { MockUser } from '@/api/user/user.types';
 
 interface AgGridProps<TData> {
   /** 열 정의 */
@@ -20,7 +20,7 @@ interface AgGridProps<TData> {
   /** Set selected count */
   setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
   /** Set edited rows */
-  setEditedRows: React.Dispatch<React.SetStateAction<IRowData[]>>;
+  setEditedRows: React.Dispatch<React.SetStateAction<MockUser[]>>;
 }
 
 export default function AgGrid<TData extends { id: number }>({

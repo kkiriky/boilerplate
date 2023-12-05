@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { useAgGridStore } from '@/store/agGridStore';
 
 import PhotoIcon from '@/assets/icons/photo.svg?react';
 import DeleteIcon from '@/assets/icons/delete.svg?react';
+import { useDeleteUser } from '@/hooks/useUser';
 
 export default function MenuCell<TData extends { id: number }>({
   data,
@@ -12,15 +12,15 @@ export default function MenuCell<TData extends { id: number }>({
     alert('If there are images in the data, go to the image editing page');
   }, []);
 
-  const deleteRow = useAgGridStore((state) => state.deleteRow);
+  const { mutate: deleteUser } = useDeleteUser();
   const onRemove = useCallback(() => {
     if (!data) return;
 
     const confirmed = window.confirm('정말로 삭제하겠습니까?');
     if (!confirmed) return;
 
-    deleteRow(data.id);
-  }, [data, deleteRow]);
+    deleteUser(data.id);
+  }, [data, deleteUser]);
 
   if (!data) {
     return null;

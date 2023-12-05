@@ -4,11 +4,11 @@ import {
   SelectionChangedEvent,
   CellValueChangedEvent,
 } from 'ag-grid-community';
-import { IRowData } from '@/store/agGridStore';
+import { MockUser } from '@/api/user/user.types';
 
 interface UseAgGridEventsParmas {
   setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
-  setEditedRows: React.Dispatch<React.SetStateAction<IRowData[]>>;
+  setEditedRows: React.Dispatch<React.SetStateAction<MockUser[]>>;
 }
 
 export default function useAgGridEvents({
@@ -29,14 +29,14 @@ export default function useAgGridEvents({
 
   // row가 선택될 때마다 선택된 row 가져오기
   const onSelectionChanged = useCallback(
-    (e: SelectionChangedEvent<IRowData>) => {
+    (e: SelectionChangedEvent<MockUser>) => {
       setSelectedCount(e.api.getSelectedRows().length);
     },
     [setSelectedCount]
   );
 
   const onCellValueChanged = useCallback(
-    (e: CellValueChangedEvent<IRowData>) => {
+    (e: CellValueChangedEvent<MockUser>) => {
       setEditedRows((rows) => {
         const index = rows.findIndex((row) => row.id === e.data.id);
         // 수정된 항목을 편집 완료 이전에 재수정하는 경우
