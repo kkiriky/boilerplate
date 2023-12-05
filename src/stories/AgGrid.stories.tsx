@@ -1,15 +1,20 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import AgGrid from '@/components/AgGrid/AgGrid';
 import { ColDef } from 'ag-grid-community';
-import { useAgGridStore } from '@/store/agGridStore';
+import { IRowData, useAgGridStore } from '@/store/agGridStore';
+import { AgGridReact } from 'ag-grid-react';
+
 import EditIcon from '@/assets/icons/edit.svg?react';
+import DownloadIcon from '@/assets/icons/download.svg?react';
+import DeleteIcon from '@/assets/icons/delete.svg?react';
 
 const meta = {
   title: 'Boilerplate/Ag Grid/Example',
   component: AgGrid,
   tags: ['autodocs'],
   args: {
+    gridRef: null,
     columnDefnitions: [],
     rowData: [],
     editable: false,
@@ -21,86 +26,124 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   render: function Render() {
+    const gridRef = useRef<AgGridReact>(null);
     const columnDefnitions: ColDef[] = useMemo(
       () => [
-        {
-          headerName: '이름',
-          field: 'name',
-          headerCheckboxSelection: true,
-          checkboxSelection: true,
-          filter: true,
-          // rowDrag: true,
-        },
-        { headerName: '연락처', field: 'phone', filter: true },
-        { headerName: '이메일', field: 'email', filter: true },
+        { headerName: '이름', field: 'name' },
+        { headerName: '연락처', field: 'phone' },
+        { headerName: '이메일', field: 'email' },
       ],
       []
     );
 
-    const rowData = useAgGridStore((state) => state.data);
-    const selectedRows = useAgGridStore((state) => state.seletedRows);
-    const editable = useAgGridStore((state) => state.editable);
-    const deleteRows = useAgGridStore((state) => state.deleteRows);
-    const toggleEditMode = useAgGridStore((state) => state.toggleEditMode);
-    const editedRows = useAgGridStore((state) => state.editedRows);
+    const [editable, setEditable] = useState(false);
+    const [selectedCount, setSelectedCount] = useState(0);
+    const [editedRows, setEditedRows] = useState<IRowData[]>([]);
 
-    const onDeleteRows = useCallback(() => {
+    const rowData = useAgGridStore((state) => state.data);
+    const deleteRows = useAgGridStore((state) => state.deleteRows);
+
+    // 삭제
+    const onDeleteSelectedRows = useCallback(() => {
+      const selectedRows = gridRef.current?.api.getSelectedRows();
+      if (!selectedRows?.length) {
+        return alert('선택된 항목이 없습니다.');
+      }
+
       const isConfirmed = confirm(
-        `선택된 ${selectedRows.length}개의 항목을 삭제하겠습니까?`
+        `선택된 ${gridRef.current?.api.getSelectedRows()
+          .length}개의 항목을 삭제하겠습니까?`
       );
       if (!isConfirmed) return;
 
       const seletedIdList = selectedRows.map((row) => row.id);
       deleteRows(seletedIdList);
-    }, [deleteRows, selectedRows]);
+    }, [deleteRows]);
 
-    const isEditing = useAgGridStore((state) => state.isEditing);
+    // 수정
     const onEdit = useCallback(() => {
       if (editable) {
-        if (isEditing) {
+        if (gridRef.current?.api.getEditingCells().length) {
           return alert('먼저 수정을 완료해주세요.');
         }
+
         // 편집 완료 시 실행할 로직
         console.log(editedRows);
+        // 선택된 항목이 있을 경우 모두 해제
+        gridRef.current?.api.deselectAll();
       }
 
-      toggleEditMode();
-    }, [editable, editedRows, isEditing, toggleEditMode]);
+      setEditable((prev) => !prev);
+    }, [editable, editedRows]);
+
+    const onExportCsv = useCallback(() => {
+      gridRef.current?.api.exportDataAsCsv({
+        // 메뉴 컬럼 제외
+        columnKeys: [
+          ...columnDefnitions.map((colDef) => colDef.field),
+          'createdAt',
+        ] as string[],
+        // 편집모드에서는 선택된 행만 추출 가능
+        onlySelected: editable,
+      });
+    }, [columnDefnitions, editable]);
 
     return (
       <>
-        <header className="sticky top-0 z-[100] mb-24 flex h-40 items-center justify-between">
-          <p className="flex h-full items-center rounded-4 bg-blue-400 px-16 text-white">
-            <b>{selectedRows.length}</b>개 선택
-          </p>
+        <header className="flex flex-col gap-16">
+          {editable ? (
+            <p className="flex h-40 items-center rounded-4 bg-blue-400 px-16 text-white">
+              <b>{selectedCount}</b>개 선택
+            </p>
+          ) : (
+            <div className="h-40" />
+          )}
 
-          <div className=" flex h-full gap-16">
-            <button
-              onClick={onDeleteRows}
-              className="h-full rounded-4 bg-blue-400 px-16 text-white"
-            >
-              선택 항목 삭제
-            </button>
+          <div className="flex h-72 justify-between">
+            <div className="flex gap-16">
+              <div className="ml-auto flex w-fit flex-col gap-4">
+                <button
+                  onClick={onExportCsv}
+                  className="flex h-40 w-140 items-center justify-center gap-8 rounded-4 bg-blue-400 px-16 text-white"
+                >
+                  <DownloadIcon className="h-20 w-20 [&_path]:fill-white" /> CSV
+                  추출
+                </button>
+                {editable && (
+                  <p className="h-20 text-13 text-blue-400">
+                    * 선택된 항목만 추출됩니다.
+                  </p>
+                )}
+              </div>
+
+              {editable && (
+                <button
+                  onClick={onDeleteSelectedRows}
+                  className="flex h-40 items-center gap-8 rounded-4 bg-blue-400 px-16 text-white"
+                >
+                  <DeleteIcon className="h-20 w-20 [&_path]:fill-white" />
+                  선택 항목 삭제
+                </button>
+              )}
+            </div>
+
             <button
               onClick={onEdit}
-              className="flex h-full items-center justify-center gap-4 rounded-4 bg-blue-400 px-16 text-white"
+              className="flex h-40 items-center justify-center gap-4 rounded-4 bg-blue-400 px-16 text-white"
             >
-              {editable ? (
-                '편집 완료'
-              ) : (
-                <>
-                  <EditIcon className="h-20 w-20 [&_path]:fill-white" />
-                  편집 모드
-                </>
-              )}
+              <EditIcon className="h-20 w-20 [&_path]:fill-white" />
+              {editable ? '편집 완료' : '편집 모드'}
             </button>
           </div>
         </header>
 
         <AgGrid
+          gridRef={gridRef}
           columnDefnitions={columnDefnitions}
           rowData={rowData}
           editable={editable}
+          setSelectedCount={setSelectedCount}
+          setEditedRows={setEditedRows}
         />
       </>
     );

@@ -9,6 +9,7 @@ import '../src/styles/react-datepicker.scss';
 import 'swiper/css';
 import '../src/styles/triangle.scss';
 import '../src/styles/popper.scss';
+import '../src/styles/ag-grid.scss';
 
 const preview: Preview = {
   parameters: {

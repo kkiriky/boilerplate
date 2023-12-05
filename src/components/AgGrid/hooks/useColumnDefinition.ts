@@ -14,7 +14,15 @@ const useColumnDefinition = ({
 }: UseColumnDefinitionParams) => {
   const columnDefs = useMemo<ColDef[]>(
     () => [
-      ...columnDefnitions,
+      ...columnDefnitions.map((colDef, i) =>
+        i === 0
+          ? {
+              ...colDef,
+              headerCheckboxSelection: editable,
+              checkboxSelection: editable,
+            }
+          : colDef
+      ),
       {
         headerName: '생성일',
         field: 'createdAt',
@@ -27,19 +35,22 @@ const useColumnDefinition = ({
         sort: 'desc',
         cellDataType: 'date', // editing 시 calendar로 입력받기 위해 타입 지정
       },
-      {
-        headerName: '',
-        field: 'menu',
-        colId: 'menu',
-        cellRenderer: MenuCell,
-        sortable: false,
-        editable: false,
-      },
+      editable
+        ? {
+            headerName: '',
+            field: 'menu',
+            colId: 'menu',
+            cellRenderer: MenuCell,
+            sortable: false,
+            filter: false,
+            editable: false,
+          }
+        : {},
     ],
-    [columnDefnitions]
+    [columnDefnitions, editable]
   );
   const defaultColDef = useMemo<ColDef>(
-    () => ({ resizable: true, sortable: true, editable }),
+    () => ({ resizable: true, sortable: true, filter: true, editable }),
     [editable]
   );
 

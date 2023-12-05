@@ -1,13 +1,20 @@
 import { useCallback } from 'react';
 import {
-  // CellClickedEvent,
   GridReadyEvent,
   SelectionChangedEvent,
   CellValueChangedEvent,
 } from 'ag-grid-community';
-import { IRowData, useAgGridStore } from '@/store/agGridStore';
+import { IRowData } from '@/store/agGridStore';
 
-export default function useAgGridEvents() {
+interface UseAgGridEventsParmas {
+  setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
+  setEditedRows: React.Dispatch<React.SetStateAction<IRowData[]>>;
+}
+
+export default function useAgGridEvents({
+  setSelectedCount,
+  setEditedRows,
+}: UseAgGridEventsParmas) {
   // 테이블 크기 자동 조정
   const onGridReady = useCallback((params: GridReadyEvent) => {
     params.api.sizeColumnsToFit();
@@ -20,37 +27,34 @@ export default function useAgGridEvents() {
   //   }
   // }, []);
 
-  const setSelectedRows = useAgGridStore((state) => state.setSelectedRows);
   // row가 선택될 때마다 선택된 row 가져오기
   const onSelectionChanged = useCallback(
     (e: SelectionChangedEvent<IRowData>) => {
-      const rows = e.api.getSelectedRows();
-      setSelectedRows(rows);
+      setSelectedCount(e.api.getSelectedRows().length);
     },
-    [setSelectedRows]
+    [setSelectedCount]
   );
 
-  const addEditedRows = useAgGridStore((state) => state.addEditedRows);
   const onCellValueChanged = useCallback(
-    (e: CellValueChangedEvent) => addEditedRows(e.data),
-    [addEditedRows]
-  );
+    (e: CellValueChangedEvent<IRowData>) => {
+      setEditedRows((rows) => {
+        const index = rows.findIndex((row) => row.id === e.data.id);
+        // 수정된 항목을 편집 완료 이전에 재수정하는 경우
+        if (index !== -1) {
+          const copy = [...rows];
+          copy[index] = e.data;
+          return copy;
+        }
 
-  const setIsEditing = useAgGridStore((state) => state.setIsEditing);
-  const onCellEditingStarted = useCallback(
-    () => setIsEditing(true),
-    [setIsEditing]
-  );
-  const onCellEditingStopped = useCallback(
-    () => setIsEditing(false),
-    [setIsEditing]
+        return [...rows, e.data];
+      });
+    },
+    [setEditedRows]
   );
 
   return {
     onGridReady,
     onSelectionChanged,
     onCellValueChanged,
-    onCellEditingStarted,
-    onCellEditingStopped,
   };
 }

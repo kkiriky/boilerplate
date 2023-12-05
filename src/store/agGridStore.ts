@@ -25,41 +25,21 @@ export interface IRowData {
 
 interface AgGridState {
   data: IRowData[];
-  seletedRows: IRowData[];
-  editedRows: IRowData[];
-  editable: boolean;
-  isEditing: boolean;
 }
 
 interface AgGridActions {
-  setSelectedRows: (rows: IRowData[]) => void;
-  toggleEditMode: () => void;
-  addEditedRows: (row: IRowData) => void;
-  setIsEditing: (isEditing: boolean) => void;
-  //
   deleteRow: (id: number) => void; // 실사용에서는 react-query 사용
   deleteRows: (idList: number[]) => void; // 실사용에서는 react-query 사용
 }
 
 export const useAgGridStore = create<AgGridState & AgGridActions>((set) => ({
-  data: mockData,
-  seletedRows: [],
-  editable: false,
-  editedRows: [],
-  isEditing: false,
-  //
-  setSelectedRows: (rows) => set(() => ({ seletedRows: rows })),
-  toggleEditMode: () => set((state) => ({ editable: !state.editable })),
-  addEditedRows: (row) =>
-    set((state) => ({ editedRows: [...state.editedRows, row] })),
-  setIsEditing: (isEditing) => set(() => ({ isEditing })),
-  //
+  data: mockData, // api
   deleteRow: (id) =>
-    set((state) => ({ data: state.data.filter((row) => row.id !== id) })),
+    set((state) => ({ data: state.data.filter((row) => row.id !== id) })), // api
   deleteRows: (idList) =>
     set((state) => {
       return {
         data: state.data.filter((row) => !idList.includes(row.id)),
       };
-    }),
+    }), // api
 }));

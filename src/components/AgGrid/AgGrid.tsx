@@ -6,31 +6,42 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import useGetLocaleText from './hooks/useGetLocaleText';
 import useColumnDefinition from './hooks/useColumnDefinition';
 import useAgGridEvents from './hooks/useAgGridEvents';
+import { IRowData } from '@/store/agGridStore';
 
 interface AgGridProps<TData> {
   /** 열 정의 */
+  gridRef: React.LegacyRef<AgGridReact<TData>>;
+  /** column definitions */
   columnDefnitions: ColDef[];
-  /** 데이터 리스트 */
+  /** row data list */
   rowData: TData[];
-  /** 편집 모드 */
+  /** is edit mode? */
   editable: boolean;
+  /** Set selected count */
+  setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
+  /** Set edited rows */
+  setEditedRows: React.Dispatch<React.SetStateAction<IRowData[]>>;
 }
 
 export default function AgGrid<TData extends { id: number }>({
+  gridRef,
   columnDefnitions,
   rowData,
   editable,
+  setSelectedCount,
+  setEditedRows,
 }: AgGridProps<TData>) {
   const { getLocaleText } = useGetLocaleText();
   const { defaultColDef, columnDefs } = useColumnDefinition({
     columnDefnitions,
     editable,
   });
-  const events = useAgGridEvents();
+  const events = useAgGridEvents({ setSelectedCount, setEditedRows });
 
   return (
     <div className="ag-theme-alpine h-[100vw]">
       <AgGridReact
+        ref={gridRef}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         rowData={rowData}
