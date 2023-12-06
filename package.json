@@ -21,6 +21,7 @@
     "@storybook/preview-api": "^7.6.3",
     "@tanstack/react-query": "^5.12.2",
     "@tanstack/react-query-devtools": "^5.12.2",
+    "@toast-ui/react-editor": "^3.2.3",
     "ag-grid-community": "^31.0.0",
     "ag-grid-react": "^31.0.0",
     "axios": "^1.6.2",
