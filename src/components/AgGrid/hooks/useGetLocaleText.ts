@@ -40,6 +40,9 @@ const useGetLocaleText = () => {
         return '~에서';
       case 'inRangeEnd':
         return '~까지';
+      case 'noRowsToShow':
+        return '데이터가 존재하지 않습니다.';
+
       default:
         if (params.defaultValue) {
           // the &lrm; marker should not be made uppercase

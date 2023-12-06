@@ -14,7 +14,7 @@ export default function MobileMenuButton({
       onClick={onToggleMenu}
       initial="closed"
       animate={isOpen ? 'open' : 'closed'}
-      className="xl:hidden"
+      // className="xl:hidden"
     >
       <svg width="24" height="24" viewBox="0 0 24 24">
         <Path

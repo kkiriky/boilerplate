@@ -18,8 +18,9 @@ const useColumnDefinition = ({
         i === 0
           ? {
               ...colDef,
-              headerCheckboxSelection: editable,
-              checkboxSelection: editable,
+              headerCheckboxSelection: true,
+              checkboxSelection: true,
+              headerCheckboxSelectionCurrentPageOnly: true,
             }
           : colDef
       ),
@@ -27,7 +28,7 @@ const useColumnDefinition = ({
         headerName: '생성일',
         field: 'createdAt',
         filter: 'agDateColumnFilter',
-        valueFormatter: (params) => formatDateTime(params.value), // 정렬을 위해 number로 받기 때문에 format이 필요
+        valueFormatter: (params) => formatDateTime(params.value), // 정렬을 위해 Date혹은 number로 받아야 하므로 format이 필요
         comparator: (valueA, valueB) => {
           if (valueA === valueB) return 0;
           return valueA > valueB ? 1 : -1;
@@ -44,8 +45,11 @@ const useColumnDefinition = ({
             sortable: false,
             filter: false,
             editable: false,
+            maxWidth: 120,
           }
-        : {},
+        : {
+            maxWidth: 120,
+          },
     ],
     [columnDefnitions, editable]
   );

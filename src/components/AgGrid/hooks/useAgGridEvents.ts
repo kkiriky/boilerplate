@@ -35,6 +35,7 @@ export default function useAgGridEvents({
     [setSelectedCount]
   );
 
+  // cell을 수정하였을 때
   const onCellValueChanged = useCallback(
     (e: CellValueChangedEvent<MockUser>) => {
       setEditedRows((rows) => {
@@ -45,7 +46,6 @@ export default function useAgGridEvents({
           copy[index] = e.data;
           return copy;
         }
-
         return [...rows, e.data];
       });
     },
