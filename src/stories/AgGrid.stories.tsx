@@ -9,7 +9,7 @@ import ReactQueryProvider from '@/components/ReactQueryProvider';
 import { ColDef } from 'ag-grid-community';
 
 const meta = {
-  title: 'Boilerplate/Ag Grid/Example',
+  title: 'Boilerplate/CustomTable/Example',
   tags: ['autodocs'],
   component: AgGrid,
   args: {

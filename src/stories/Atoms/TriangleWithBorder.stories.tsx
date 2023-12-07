@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import '@/styles/triangle.scss';
 
 const meta = {
-  title: 'Boilerplate/Triangle/TriangleWithBorder',
+  title: 'Boilerplate/Atoms/TriangleWithBorder',
   parameters: {
     layout: 'centered',
   },
