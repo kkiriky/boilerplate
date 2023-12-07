@@ -29,6 +29,12 @@ dependencies:
   '@tanstack/react-query-devtools':
     specifier: ^5.12.2
     version: 5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0)
+  '@toast-ui/editor':
+    specifier: ^3.2.2
+    version: 3.2.2
+  '@toast-ui/editor-plugin-color-syntax':
+    specifier: ^3.1.0
+    version: 3.1.0
   '@toast-ui/react-editor':
     specifier: ^3.2.3
     version: 3.2.3(react@18.2.0)
@@ -101,6 +107,9 @@ dependencies:
   throttle-debounce:
     specifier: ^5.0.0
     version: 5.0.0
+  tui-color-picker:
+    specifier: ^2.2.8
+    version: 2.2.8
   zustand:
     specifier: ^4.4.7
     version: 4.4.7(@types/react@18.2.42)(immer@10.0.3)(react@18.2.0)
@@ -4021,6 +4030,12 @@ packages:
     dependencies:
       '@testing-library/dom': 9.3.3
     dev: true
+
+  /@toast-ui/editor-plugin-color-syntax@3.1.0:
+    resolution: {integrity: sha512-UVKfMBPV+3snSaJn9RUKGbxJbgi92D2t68ow8wAjGezvMp1ht4UVETrvomdTGr+RYhXSeH3JvSwN9nmQqw0qzA==}
+    dependencies:
+      tui-color-picker: 2.2.8
+    dev: false
 
   /@toast-ui/editor@3.2.2:
     resolution: {integrity: sha512-ASX7LFjN2ZYQJrwmkUajPs7DRr9FsM1+RQ82CfTO0Y5ZXorBk1VZS4C2Dpxinx9kl55V4F8/A2h2QF4QMDtRbA==}
@@ -9530,6 +9545,10 @@ packages:
       tslib: 1.14.1
       typescript: 5.3.3
     dev: true
+
+  /tui-color-picker@2.2.8:
+    resolution: {integrity: sha512-q5sE9NQ5NR9lYpilYjcI7Sdv0KCogo+W8fZY+AYTj/HYg+9fscYy3UuJ6UQiV1bF+ARCLwFRWC8UcOt9kuUctQ==}
+    dev: false
 
   /type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}

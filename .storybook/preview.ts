@@ -7,10 +7,11 @@ import '../src/styles/scrollbar.scss';
 import '../src/styles/react-select.scss';
 import '../src/styles/pagination.scss';
 import '../src/styles/react-datepicker.scss';
-import 'swiper/css';
 import '../src/styles/triangle.scss';
 import '../src/styles/popper.scss';
 import '../src/styles/ag-grid.scss';
+
+import 'swiper/css';
 
 // Initialize MSW
 initialize({
