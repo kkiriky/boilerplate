@@ -48,6 +48,7 @@
     "tailwind-merge": "^2.0.0",
     "throttle-debounce": "^5.0.0",
     "tui-color-picker": "^2.2.8",
+    "uuid": "^9.0.1",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
@@ -64,6 +65,7 @@
     "@types/react-datepicker": "^4.19.3",
     "@types/react-dom": "^18.2.15",
     "@types/throttle-debounce": "^5.0.2",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",

@@ -5,13 +5,11 @@ import { postHandlers } from '@/mocks/postHandlers';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
 
 const meta = {
-  title: 'Boilerplate/Editor/ToastViewer',
+  title: 'Boilerplate/Editor/Toast/ToastViewer',
   component: ToastViewerComponent,
   parameters: {
-    layout: 'centered',
     msw: { handlers: postHandlers },
   },
-  tags: ['autodocs'],
   decorators: [
     (Story) => {
       return (

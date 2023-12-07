@@ -2,14 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { default as ToastEditorComponent } from '@/components/ToastEditor/ToastEditor';
 import { useCallback, useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
+import useUploadImage from '@/components/ToastEditor/hooks/useUploadImage';
 
 const meta = {
-  title: 'Boilerplate/Editor/ToastEditor',
+  title: 'Boilerplate/Editor/Toast/ToastEditor',
   component: ToastEditorComponent,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
   args: {
     editorRef: null,
     initialValue: '',
@@ -23,12 +20,13 @@ export const ToastEditor: Story = {
   render: function Render() {
     const editorRef = useRef<Editor>(null);
 
-    const onSubmit = useCallback(() => {
+    const { onUploadImageWhenSubmit } = useUploadImage(editorRef);
+    const onSubmit = useCallback(async () => {
       if (!editorRef?.current) return;
 
-      console.log(editorRef.current.getInstance().getMarkdown());
-      // editorRef.current.getInstance().getHTML();
-    }, []);
+      const markdownText = onUploadImageWhenSubmit(editorRef.current);
+      console.log(markdownText);
+    }, [onUploadImageWhenSubmit]);
 
     return (
       <>

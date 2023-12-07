@@ -15,7 +15,7 @@ export default function ImageUploadDropzone() {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onabort = () => console.log('파일 읽기가 중단되었습니다.');
+      reader.onabort = () => alert('파일 읽기가 중단되었습니다.');
       reader.onerror = () => alert('파일을 읽어오는데 실패하였습니다.');
       reader.onloadend = () => {
         if (!reader.result || typeof reader.result !== 'string') return;

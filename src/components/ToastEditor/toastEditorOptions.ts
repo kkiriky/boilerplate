@@ -18,3 +18,11 @@ export const colorSyntaxOptions = {
     '#C1BEF9',
   ],
 };
+
+export const toolbarItemsExceptImage = [
+  ['heading', 'bold', 'italic', 'strike'],
+  ['hr', 'quote'],
+  ['ul', 'ol', 'task', 'indent', 'outdent'],
+  // ['code', 'codeblock'],
+  ['table', 'link'],
+];
