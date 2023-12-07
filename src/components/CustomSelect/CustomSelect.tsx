@@ -1,6 +1,7 @@
 import Select, { GroupBase, Props } from 'react-select';
 import DropdownIndicator from './DropdownIndicator';
 import { SelectOption } from '@/types/select.types';
+import '@/styles/react-select.scss';
 
 // 예제는 CustomSelect.stories.tsx 참고
 export default function CustomSelect<

@@ -7,6 +7,8 @@ import ChevronRight from '@/assets/icons/chevron-right.svg?react';
 import ChevronRightDouble from '@/assets/icons/chevron-double-right.svg?react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import '@/styles/pagination.scss';
+
 interface PaginationProps {
   totalPage: number;
   currentPage: number;

@@ -8,6 +8,8 @@ import useColumnDefinition from './hooks/useColumnDefinition';
 import useAgGridEvents from './hooks/useAgGridEvents';
 import { MockUser } from '@/api/user/user.types';
 
+import '@/styles/ag-grid.scss';
+
 interface AgGridProps<TData> {
   /** gridRef */
   gridRef: React.RefObject<AgGridReact<TData>> | null;

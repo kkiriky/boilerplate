@@ -5,6 +5,8 @@ import ChevronLeft from '@/assets/icons/chevron-left.svg?react';
 import ChevronRight from '@/assets/icons/chevron-right.svg?react';
 import DatePickerCustomInput from './DatepickerCustomInput';
 
+import '@/styles/react-datepicker.scss';
+
 export default function CustomDatepicker<
   CustomModifierNames extends string = never,
   WithRange extends boolean | undefined = undefined,

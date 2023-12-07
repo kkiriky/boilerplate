@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { faker } from '@faker-js/faker';
+import '@/styles/scrollbar.scss';
 
 const meta = {
   title: 'Boilerplate/Atoms/CustomScrollbar',

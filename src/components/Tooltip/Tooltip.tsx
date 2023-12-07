@@ -3,6 +3,8 @@ import { OffsetsFunction } from '@popperjs/core/lib/modifiers/offset';
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 
+import '@/styles/popper.scss';
+
 interface TooltipProps {
   /** reference element */
   referenceElement: React.RefObject<HTMLButtonElement> | null;

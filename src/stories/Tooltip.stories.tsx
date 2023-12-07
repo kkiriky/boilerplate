@@ -21,13 +21,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   render: function Render() {
-    const [alwaysVisible, setAlwaysVisible] = useState(false); // storybook 용도
-    const [placement, setPlacement] = useState<Placement>('bottom'); // storybook 용도
-
     const referenceElement = useRef<HTMLButtonElement | null>(null);
     const [visible, setVisibile] = useState(false);
     const onMouseEnter = useCallback(() => setVisibile(true), []);
     const onMouseLeave = useCallback(() => setVisibile(false), []);
+
+    const [alwaysVisible, setAlwaysVisible] = useState(false); // storybook 용도
+    const [placement, setPlacement] = useState<Placement>('bottom'); // storybook 용도
 
     return (
       <div className="flex flex-col gap-24 pt-100">

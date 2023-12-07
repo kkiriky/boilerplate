@@ -1,4 +1,5 @@
-// index.css의 .radio를 사용
+import '@/styles/radio.scss';
+
 export default function RadioInput() {
   return (
     <div className="flex gap-24">
