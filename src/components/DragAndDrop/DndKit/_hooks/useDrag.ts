@@ -2,9 +2,9 @@ import { DragEndEvent, DragStartEvent, UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { useCallback, useState } from 'react';
 
-export default function useDrag<T extends { id: number }>(
+const useDrag = <T extends { id: number }>(
   setItems: React.Dispatch<React.SetStateAction<T[]>>
-) {
+) => {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
   const onDragStart = useCallback((e: DragStartEvent) => {
@@ -30,4 +30,6 @@ export default function useDrag<T extends { id: number }>(
   );
 
   return { activeId, onDragStart, onDragEnd };
-}
+};
+
+export default useDrag;

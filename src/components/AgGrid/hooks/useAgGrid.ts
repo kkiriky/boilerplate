@@ -9,12 +9,12 @@ interface UseAgGridParams<TData, TId> {
   editRows: (rows: TData[]) => void;
 }
 
-export default function useAgGrid<TData extends { id: TId }, TId>({
+const useAgGrid = <TData extends { id: TId }, TId>({
   columnDefnitions,
   refetch,
   deleteRows,
   editRows,
-}: UseAgGridParams<TData, TId>) {
+}: UseAgGridParams<TData, TId>) => {
   const gridRef = useRef<AgGridReact<TData>>(null);
 
   const [editable, setEditable] = useState(false);
@@ -92,4 +92,6 @@ export default function useAgGrid<TData extends { id: TId }, TId>({
     onEdit,
     onExportCsv,
   };
-}
+};
+
+export default useAgGrid;

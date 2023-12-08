@@ -11,10 +11,10 @@ interface UseAgGridEventsParmas {
   setEditedRows: React.Dispatch<React.SetStateAction<MockUser[]>>;
 }
 
-export default function useAgGridEvents({
+const useAgGridEvents = ({
   setSelectedCount,
   setEditedRows,
-}: UseAgGridEventsParmas) {
+}: UseAgGridEventsParmas) => {
   // 테이블 크기 자동 조정
   const onGridReady = useCallback((params: GridReadyEvent) => {
     params.api.sizeColumnsToFit();
@@ -57,4 +57,6 @@ export default function useAgGridEvents({
     onSelectionChanged,
     onCellValueChanged,
   };
-}
+};
+
+export default useAgGridEvents;

@@ -4,9 +4,7 @@ import { base64toFile } from '@/utils/base64ToFileObj';
 import { base64ImageRegex } from '@/common/regex';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function useUploadImage(
-  editorRef: React.RefObject<Editor> | null
-) {
+const useUploadImage = (editorRef: React.RefObject<Editor> | null) => {
   // 이미지 업로드 버튼 생성
   const imageUploadButton = useMemo(() => {
     const button = document.createElement('button');
@@ -96,4 +94,6 @@ export default function useUploadImage(
     onUploadImage,
     onUploadImageWhenSubmit,
   };
-}
+};
+
+export default useUploadImage;
