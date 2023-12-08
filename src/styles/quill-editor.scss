@@ -1,0 +1,14 @@
+.ql-toolbar {
+  .ql-picker-item {
+    border-radius: 50%;
+  }
+}
+
+.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item.ql-selected,
+.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item:hover {
+  border-color: transparent;
+}
+
+.ql-container {
+  height: 80vh;
+}

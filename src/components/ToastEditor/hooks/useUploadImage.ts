@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import { base64toFile } from '@/utils/base64ToFileObj';
-import { base64ImageRegex } from '@/common/regex';
+import { base64ImageRegexForMarkdown } from '@/common/regex';
 import { v4 as uuidv4 } from 'uuid';
 
 const useUploadImage = (editorRef: React.RefObject<Editor> | null) => {
@@ -30,7 +30,7 @@ const useUploadImage = (editorRef: React.RefObject<Editor> | null) => {
   }, []);
 
   const onUploadImage = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!editorRef?.current) return;
 
       const { files } = e.target;
@@ -59,7 +59,7 @@ const useUploadImage = (editorRef: React.RefObject<Editor> | null) => {
     let markdownText: string = editor.getInstance().getMarkdown();
 
     // 1) base64 이미지들을 추출
-    const matchArray = [...markdownText.matchAll(base64ImageRegex)];
+    const matchArray = [...markdownText.matchAll(base64ImageRegexForMarkdown)];
     // 이미지가 존재할 경우에만
     if (matchArray.length) {
       // 첫 번째 인자는 정규표현식과 일치하는 텍스트(markdownImage), 두 번째 부터는 정규표현식의 capture 그룹과 일치하는 텍스트(base64)
@@ -69,7 +69,7 @@ const useUploadImage = (editorRef: React.RefObject<Editor> | null) => {
         console.log(file);
 
         try {
-          // 3) 이미지 업로드
+          // 3) 이미지 업로드 (formdata에 한 번에 넘기는 방식 X, 업로드된 이미지의 주소를 받아야만 하므로)
           /**************************
               이미지 업로드 로직 작성
              **************************/
