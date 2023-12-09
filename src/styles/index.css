@@ -15,6 +15,10 @@
 }
 
 @layer components {
+  .center-modal {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white;
+  }
+
   .perview-center-slider {
     @apply relative max-w-[1180px];
 
