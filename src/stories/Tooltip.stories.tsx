@@ -69,10 +69,11 @@ export const Example: Story = {
         <div className="flex flex-col gap-8">
           <b>Position: {placement}</b>
           <div className="grid grid-cols-5 gap-16">
-            {placement2DList.map((placementList) => (
-              <div className="flex flex-col gap-12">
-                {placementList.map((item) => (
+            {placement2DList.map((placementList, i) => (
+              <div key={i} className="flex flex-col gap-12">
+                {placementList.map((item, j) => (
                   <button
+                    key={j}
                     onClick={() => setPlacement(item)}
                     className="rounded-4 border bg-blue-400 px-12 py-8 text-white  hover:bg-blue-300"
                   >

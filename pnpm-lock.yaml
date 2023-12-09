@@ -154,6 +154,9 @@ devDependencies:
   '@tanstack/eslint-plugin-query':
     specifier: ^5.12.1
     version: 5.12.1(eslint@8.55.0)(typescript@5.3.3)
+  '@types/navermaps':
+    specifier: ^3.7.4
+    version: 3.7.4
   '@types/node':
     specifier: ^20.10.1
     version: 20.10.3
@@ -4196,6 +4199,10 @@ packages:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
     dev: true
 
+  /@types/geojson@7946.0.13:
+    resolution: {integrity: sha512-bmrNrgKMOhM3WsafmbGmC+6dsF2Z308vLFsQ3a/bT8X8Sv5clVYpPars/UPq+sAaJP+5OoLAYgwbkS5QEJdLUQ==}
+    dev: true
+
   /@types/glob@7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
@@ -4260,6 +4267,12 @@ packages:
 
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
+    dev: true
+
+  /@types/navermaps@3.7.4:
+    resolution: {integrity: sha512-fAazswZgl/l/1Mw375hJcNAC244SiTA0+Y6HE8atkVAtrdawlpgpkaRMCpFX+15iDiQzTfO0MmE+y1+6NpWFuQ==}
+    dependencies:
+      '@types/geojson': 7946.0.13
     dev: true
 
   /@types/node-fetch@2.6.9:

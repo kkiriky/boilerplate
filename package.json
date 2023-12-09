@@ -64,6 +64,7 @@
     "@storybook/react-vite": "^7.6.3",
     "@storybook/test": "^7.6.3",
     "@tanstack/eslint-plugin-query": "^5.12.1",
+    "@types/navermaps": "^3.7.4",
     "@types/node": "^20.10.1",
     "@types/quill": "^2.0.14",
     "@types/react": "^18.2.37",
