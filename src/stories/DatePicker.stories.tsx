@@ -13,8 +13,6 @@ const meta = {
   args: {
     selected: null,
     onChange: (_date: Date) => {},
-    placeholderText: '날짜를 선택해주세요.',
-    isClearable: true,
   },
 } satisfies Meta<typeof CustomDatepicker>;
 
@@ -32,6 +30,8 @@ export const Basic: Story = {
           selected={date}
           onChange={(date) => setDate(date)}
           selectsRange={false}
+          placeholderText={'날짜를 선택해주세요.'}
+          isClearable
           // showYearDropdown
           // yearDropdownItemNumber={5}
           // scrollableYearDropdown
@@ -58,6 +58,8 @@ export const ControllerExample: Story = {
               selected={value}
               onChange={(date) => onChange(date)}
               selectsRange={false}
+              placeholderText={'날짜를 선택해주세요.'}
+              isClearable
             />
           )}
         />
@@ -75,24 +77,28 @@ export const Range: Story = {
       <div className="grid grid-cols-[250px_auto_250px] items-center gap-8">
         <CustomDatepicker
           {...args}
+          selectsStart
           selected={startDate}
           onChange={(date) => setStartDate(date)}
-          selectsStart
           startDate={startDate}
           endDate={endDate}
           maxDate={endDate}
           selectsRange={false}
+          placeholderText={'시작 날짜를 선택해주세요.'}
+          isClearable
         />
         <span>~</span>
         <CustomDatepicker
           {...args}
+          selectsEnd
           selected={endDate}
           onChange={(date) => setEndDate(date)}
-          selectsEnd
           startDate={startDate}
           endDate={endDate}
           minDate={startDate}
           selectsRange={false}
+          placeholderText={'종료 날짜를 선택해주세요.'}
+          isClearable={!!endDate}
         />
       </div>
     );
@@ -118,6 +124,8 @@ export const RangeForOneDatepicker: Story = {
           startDate={startDate}
           endDate={endDate}
           selectsRange
+          placeholderText={'기간을 선택해주세요.'}
+          isClearable
         />
       </div>
     );

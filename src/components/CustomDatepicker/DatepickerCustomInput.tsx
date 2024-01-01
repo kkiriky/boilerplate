@@ -11,9 +11,8 @@ interface CustomInputProps {
 const DatePickerCustomInput = forwardRef(
   (
     { isReadOnly, ...props }: CustomInputProps,
-    ref: React.LegacyRef<HTMLInputElement>
+    ref: React.LegacyRef<HTMLInputElement>,
   ) => {
-    console.log(props);
     return (
       <div
         className={classNames('custom-input-container', {
@@ -25,6 +24,6 @@ const DatePickerCustomInput = forwardRef(
         <input {...props} ref={ref} readOnly={isReadOnly} />
       </div>
     );
-  }
+  },
 );
 export default DatePickerCustomInput;
