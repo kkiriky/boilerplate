@@ -1,20 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Tooltip from '@/components/Tooltip/Tooltip';
+import Popper from '@/components/Popper/CustomPopper';
 import { useCallback, useRef, useState } from 'react';
 import { Placement } from '@popperjs/core';
 
 const meta = {
-  title: 'Boilerplate/Tooltip/Example',
-  component: Tooltip,
+  title: 'Boilerplate/Popper/Example',
+  component: Popper,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
   args: {
+    children: null,
     referenceElement: null,
     visible: false,
   },
-} satisfies Meta<typeof Tooltip>;
+} satisfies Meta<typeof Popper>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -44,12 +45,17 @@ export const Example: Story = {
             Hover Me!
           </button>
 
-          <Tooltip
+          <Popper
             referenceElement={referenceElement}
             visible={alwaysVisible ? alwaysVisible : visible}
             placement={placement}
             offset={[0, 16]}
-          />
+            hasArrow
+          >
+            <div className="flex h-100 w-240 items-center justify-center rounded-4 border border-gray-400 bg-white p-16">
+              Tooltip Content
+            </div>
+          </Popper>
         </div>
 
         {/* Storybook 용도 */}

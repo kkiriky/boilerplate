@@ -6,6 +6,8 @@ import { usePopper } from 'react-popper';
 import '@/styles/popper.scss';
 
 interface TooltipProps {
+  /** content */
+  children: React.ReactNode;
   /** reference element */
   referenceElement: React.RefObject<HTMLButtonElement> | null;
   /** visible */
@@ -15,35 +17,30 @@ interface TooltipProps {
   offset?:
     | OffsetsFunction
     | [number | null | undefined, number | null | undefined];
+  hasArrow?: boolean;
 }
 
-export default function Tooltip({
+export default function Popper({
+  children,
   referenceElement,
   visible,
   placement = 'auto',
   offset,
+  hasArrow,
 }: TooltipProps) {
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null
-  );
-  const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null);
+  const [popperEl, setPopperEl] = useState<HTMLDivElement | null>(null);
+  const [arrowEl, setArrowEl] = useState<HTMLDivElement | null>(null);
 
   const { styles, attributes } = usePopper(
     referenceElement?.current,
-    popperElement,
+    popperEl,
     {
       placement,
       modifiers: [
-        {
-          name: 'arrow',
-          options: { element: arrowElement },
-        },
-        {
-          name: 'offset',
-          options: { offset },
-        },
+        { name: 'arrow', options: { element: arrowEl } },
+        { name: 'offset', options: { offset } },
       ],
-    }
+    },
   );
 
   if (!visible) {
@@ -52,18 +49,15 @@ export default function Tooltip({
 
   return (
     <div
-      ref={setPopperElement}
+      ref={setPopperEl}
       style={styles.popper}
       {...attributes.popper}
-      className="tooltip flex h-100 w-240 items-center justify-center rounded-4 border border-gray-400 bg-white p-16"
+      className="popper"
     >
-      <span>Tooltip content</span>
-
-      <div
-        ref={setArrowElement}
-        style={styles.arrow}
-        className="tooltip-arrow"
-      />
+      {hasArrow && (
+        <div ref={setArrowEl} style={styles.arrow} className="popper-arrow" />
+      )}
+      {children}
     </div>
   );
 }

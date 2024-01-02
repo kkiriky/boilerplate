@@ -1,6 +1,5 @@
-import { modalState } from '@/atoms/modal';
-import React from 'react';
 import { useRecoilValue } from 'recoil';
+import { modalState } from '@/atoms/modal';
 import { useModal } from './hooks/useModal';
 
 const Modals = () => {
