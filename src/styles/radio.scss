@@ -1,4 +1,7 @@
 .radio {
+  --radio-border: #ccc;
+  --radio-checked: #1668e4;
+
   position: relative;
   margin: 0;
   width: 20px;
@@ -7,15 +10,15 @@
   cursor: pointer;
 
   appearance: none;
-  border: 2px solid #ccc;
+  border: 2px solid var(--radio-border);
   border-radius: 50%;
 
   &:not(:checked):hover {
-    border-color: rgba(#ccc, 0.7);
+    border-color: rgba(var(--radio-border), 0.7);
   }
 
   &:checked {
-    border-color: #1668e4;
+    border-color: var(--radio-checked);
   }
 
   &:checked::after {
@@ -26,6 +29,6 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #1668e4;
+    background-color: var(--radio-checked);
   }
 }

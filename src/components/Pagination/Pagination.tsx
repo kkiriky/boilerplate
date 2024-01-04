@@ -25,12 +25,14 @@ export default function Pagination({
   // 페이지 이동 시 다른 파라미터를 빠뜨리지 않기 위함
   const params = useMemo(() => {
     return new URLSearchParams(
-      [...searchParams.entries()].filter(([key]) => key !== 'page')
+      [...searchParams.entries()].filter(([key]) => key !== 'page'),
     );
   }, [searchParams]);
 
   // 10페이지 이전으로
   const onClickPreviousDouble = useCallback(() => {
+    if (currentPage === 1) return;
+
     const targetPage = currentPage - 10 < 1 ? 1 : currentPage - 10;
 
     params.append('page', String(targetPage));
@@ -39,6 +41,8 @@ export default function Pagination({
 
   // 10페이지 다음으로
   const onClickNextDouble = useCallback(() => {
+    if (currentPage === totalPage) return;
+
     const targetPage =
       currentPage + 10 > totalPage ? totalPage : currentPage + 10;
 
@@ -51,7 +55,7 @@ export default function Pagination({
       params.append('page', String(selected + 1));
       navigate(`?${params}`);
     },
-    [navigate, params]
+    [navigate, params],
   );
 
   // 페이지 블록을 5개로 유지하기 위함 (첫페이지 페이지1 페이지2 페이지3 끝페이지)

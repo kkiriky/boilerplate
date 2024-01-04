@@ -1,17 +1,21 @@
 .custom-scrollbar {
+  --scrollbar-thumb: #cecece;
+  --scrollbar-track-background: #fff;
+  --scrollbar-track-shadow: #999;
+
   &::-webkit-scrollbar {
     width: 10px;
     height: 8px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #cecece;
+    background-color: var(--scrollbar-thumb);
     border: 2px solid transparent;
     border-radius: 8px;
     background-clip: padding-box;
   }
   &::-webkit-scrollbar-track {
     border-radius: 8px;
-    background-color: #fff;
-    box-shadow: inset 0px 0px 4px #999;
+    background-color: var(--scrollbar-track-background);
+    box-shadow: inset 0px 0px 4px var(--scrollbar-track-shadow);
   }
 }

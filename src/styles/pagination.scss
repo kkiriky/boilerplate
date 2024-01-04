@@ -1,4 +1,6 @@
 .pagination {
+  --pagination-selected: #a855f7;
+
   display: flex;
   gap: 8px;
 
@@ -23,8 +25,8 @@
 
   li.selected {
     a {
-      border: 1px solid #a855f7;
-      background-color: #a855f7;
+      border: 1px solid var(--pagination-selected);
+      background-color: var(--pagination-selected);
       color: #fff;
     }
   }

@@ -1,6 +1,6 @@
 .popper {
-  --arrow-background: #fff;
-  --arrow-border: #9ca3af;
+  --popper-arrow-background: #fff;
+  --popper-arrow-border: #9ca3af;
 
   // top
   &[data-popper-placement^='top'] > .popper-arrow {
@@ -14,13 +14,15 @@
     /* 배경 */
     &::before {
       bottom: 1.414px;
-      border-color: var(--arrow-background) transparent transparent transparent;
+      border-color: var(--popper-arrow-background) transparent transparent
+        transparent;
       z-index: 10;
     }
     /* 테두리 */
     &::after {
       bottom: 0;
-      border-color: var(--arrow-border) transparent transparent transparent;
+      border-color: var(--popper-arrow-border) transparent transparent
+        transparent;
       z-index: 9;
     }
   }
@@ -37,13 +39,15 @@
     /* 배경 */
     &::before {
       top: 1.414px;
-      border-color: transparent transparent var(--arrow-background) transparent;
+      border-color: transparent transparent var(--popper-arrow-background)
+        transparent;
       z-index: 10;
     }
     /* 테두리 */
     &::after {
       top: 0;
-      border-color: transparent transparent var(--arrow-border) transparent;
+      border-color: transparent transparent var(--popper-arrow-border)
+        transparent;
       z-index: 9;
     }
   }
@@ -60,13 +64,15 @@
     /* 배경 */
     &::before {
       right: 1.414px;
-      border-color: transparent transparent transparent var(--arrow-background);
+      border-color: transparent transparent transparent
+        var(--popper-arrow-background);
       z-index: 10;
     }
     /* 테두리 */
     &::after {
       right: 0;
-      border-color: transparent transparent transparent var(--arrow-border);
+      border-color: transparent transparent transparent
+        var(--popper-arrow-border);
       z-index: 9;
     }
   }
@@ -83,13 +89,15 @@
     /* 배경 */
     &::before {
       left: 1.414px;
-      border-color: transparent var(--arrow-background) transparent transparent;
+      border-color: transparent var(--popper-arrow-background) transparent
+        transparent;
       z-index: 10;
     }
     /* 테두리 */
     &::after {
       left: 0;
-      border-color: transparent var(--arrow-border) transparent transparent;
+      border-color: transparent var(--popper-arrow-border) transparent
+        transparent;
       z-index: 9;
     }
   }
