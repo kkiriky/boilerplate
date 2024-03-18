@@ -1,5 +1,7 @@
 /* Nesting을 해야 기본 스타일을 overriding 할 수 있으니 nesting을 제거하지 말 것 */
 
+// container > 1.control
+// container > 2.menu
 // reactSelectContainerStyle
 .react-select-container {
   --rs-background: #fff;
@@ -7,13 +9,9 @@
   --rs-placeholder: #888;
   --rs-active: #00b4a9;
   --rs-active-text: #fff;
+  --rs-active-border: #9395a6;
   --rs-scroll-thumb: #ccc;
   --rs-disabled: #ccc;
-
-  // container > 1.control
-  // container > 2.menu
-  // 전체 컨테이너(width만 fit-content로 설정, 이후 설정 X)
-  // width: fit-content;
 
   // control > 1.value-container
   // control > 2.indicators

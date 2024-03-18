@@ -14,6 +14,8 @@ const meta = {
   render: function Render(args) {
     const { currentPage } = useCurrentPage();
 
+    console.log({ currentPage });
+
     return <Pagination {...args} currentPage={currentPage} />;
   },
 } satisfies Meta<typeof Pagination>;
