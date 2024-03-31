@@ -1,3 +1,5 @@
+// import type { ToolbarItemOptions } from '@toast-ui/editor/types/ui';
+
 export const colorSyntaxOptions = {
   preset: [
     '#333333',
@@ -26,6 +28,7 @@ interface ToolbarItem {
 }
 
 export type ToolbarItems = (string | ToolbarItem)[][];
+// export type ToolbarItems = (string | ToolbarItemOptions)[][];
 
 export const toolbarItemsExceptImage: ToolbarItems = [
   ['heading', 'bold', 'italic', 'strike'],

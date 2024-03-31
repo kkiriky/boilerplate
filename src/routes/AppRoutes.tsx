@@ -1,7 +1,8 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 
-// const Main = lazy(() => import('@/pages/Main/Main'));
+const Main = lazy(() => import('@/pages/Main'));
+const NotFound = lazy(() => import('@/pages/Main'));
 
 export default function AppRoutes() {
   return (
@@ -24,12 +25,4 @@ const AppLayout = () => {
       </div>
     </>
   );
-};
-
-const Main = () => {
-  return <div>Main</div>;
-};
-
-const NotFound = () => {
-  return <div>NotFound</div>;
 };
