@@ -1,12 +1,7 @@
-import { useMemo } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/i18n/ko-kr';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import {
-  colorSyntaxOptions,
-  toolbarItemsExceptImage,
-} from './toastEditorOptions';
-import useUploadImage from './hooks/useUploadImage';
+import { colorSyntaxOptions, type ToolbarItems } from './ToastEditor.data';
 
 import '@toast-ui/editor/dist/toastui-editor.css';
 import 'tui-color-picker/dist/tui-color-picker.css';
@@ -15,27 +10,18 @@ import '@/styles/toast-editor.scss';
 interface ToastEditorProps {
   editorRef: React.RefObject<Editor> | null;
   initialValue?: string;
+  toolbarItems: ToolbarItems;
+  inputFileRef: React.RefObject<HTMLInputElement>;
+  onUploadImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function ToastEditor({
   editorRef,
   initialValue,
+  toolbarItems,
+  inputFileRef,
+  onUploadImage,
 }: ToastEditorProps) {
-  const { imageUploadButton, inputFileRef, onUploadImage } =
-    useUploadImage(editorRef);
-
-  // 생성된 이미지 업로드 버튼을 toolbar에 넣기
-  const toolbarItems = useMemo(() => {
-    return toolbarItemsExceptImage.map((toolbarList, i) => {
-      if (i !== toolbarItemsExceptImage.length - 1) return toolbarList;
-
-      return [
-        ...toolbarList,
-        { name: 'image', el: imageUploadButton, tooltip: '이미지 삽입' },
-      ];
-    });
-  }, [imageUploadButton]);
-
   return (
     <>
       <Editor

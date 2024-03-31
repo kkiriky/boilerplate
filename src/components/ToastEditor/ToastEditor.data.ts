@@ -19,7 +19,15 @@ export const colorSyntaxOptions = {
   ],
 };
 
-export const toolbarItemsExceptImage = [
+interface ToolbarItem {
+  name: string;
+  el: HTMLButtonElement;
+  tooltip: string;
+}
+
+export type ToolbarItems = (string | ToolbarItem)[][];
+
+export const toolbarItemsExceptImage: ToolbarItems = [
   ['heading', 'bold', 'italic', 'strike'],
   ['hr', 'quote'],
   ['ul', 'ol', 'task', 'indent', 'outdent'],

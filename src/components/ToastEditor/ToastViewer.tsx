@@ -6,9 +6,7 @@ interface ToastViewerProps {
 }
 
 export default function ToastViewer({ initialValue }: ToastViewerProps) {
-  if (!initialValue) {
-    return null;
-  }
+  if (!initialValue) return null;
 
   return <Viewer initialValue={initialValue} />;
 }
