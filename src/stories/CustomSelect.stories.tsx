@@ -7,7 +7,7 @@ import { SingleValue, MultiValue } from 'react-select';
 import { SelectOption } from '@/types/select.types';
 
 const isSingleValue = (
-  option: MultiValue<SelectOption> | SingleValue<SelectOption>
+  option: MultiValue<SelectOption> | SingleValue<SelectOption>,
 ): option is SingleValue<SelectOption> => {
   if (option !== null && !('value' in option)) return false;
 
@@ -35,7 +35,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   render: function Render(args) {
-    const [value, setValue] = useState<string>();
+    const [value, setValue] = useState<string | number>();
 
     return (
       <CustomSelect
